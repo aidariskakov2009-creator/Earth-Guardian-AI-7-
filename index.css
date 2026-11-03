@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* ---- Earth Guardian palette: atmospheric ops-room, not generic dark-mode ---- */
+  --color-abyss: #060d16;
+  --color-deep: #0a1420;
+  --color-panel: #101c2c;
+  --color-panel-hi: #16283d;
+  --color-line: #223448;
+
+  --color-signal: #2dd4bf;
+  --color-signal-dim: #1f8f82;
+  --color-current: #5b9dff;
+  --color-bio: #8ee06a;
+  --color-amber: #f5a524;
+  --color-coral: #fb5b4e;
+
+  --color-ink: #e8eef2;
+  --color-mist: #93a7b8;
+  --color-ash: #5c7186;
+
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--color-deep);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--color-signal); color: var(--color-abyss); }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-line); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-ash); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-ticker { animation: ticker-scroll 40s linear infinite; }
+.animate-ticker:hover { animation-play-state: paused; }
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+.animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-rise { animation: rise-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+.glass {
+  background: linear-gradient(155deg, rgba(22, 40, 61, 0.65), rgba(16, 28, 44, 0.55));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--color-line);
+}
+
+.text-gradient-signal {
+  background: linear-gradient(120deg, #2dd4bf, #5b9dff 65%, #8ee06a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.grid-overlay {
+  background-image:
+    linear-gradient(to right, rgba(148, 167, 184, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 167, 184, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
